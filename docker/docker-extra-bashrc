@@ -1,8 +1,11 @@
+alias ll='\ls -ltrh'
 
-alias ll='ls -ltrh'
-alias la='ls -ltrah'
-alias l='ls -1'
-alias ld='ls -d */'
+function la() {
+    \ls -altrh | grep -v -E '( \.$| \..$)'
+}
+
+alias l='\ls -1'
+alias ld='\ls -d */'
 
 function get_curr_user_prompt() {
     if [ $UID -ne 0 ]
@@ -35,4 +38,3 @@ export COLOR_GRAY='\e[0;30m'
 export COLOR_LIGHT_GRAY='\e[0;37m'
 
 export PS1="$COLOR_RED\!$COLOR_NC $COLOR_WHITE\$(date +\"%a %Y-%m-%d %k:%M:%S\")$COLOR_NC $COLOR_LIGHT_CYAN\$(hostname -f)$COLOR_NC\n$COLOR_RED\!$COLOR_NC $COLOR_CYAN[\$(pwd)]$COLOR_NC [$COLOR_LIGHT_GREEN\$(whoami)$COLOR_NC]\n$PS1_USER_PROMPT "
-

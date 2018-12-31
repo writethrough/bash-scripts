@@ -32,9 +32,11 @@ function test_docker_extra_bashrc() {
         && docker cp docker-extra-bashrc bash:/home/jd/docker-extra-bashrc \
         && docker exec -it --user root --workdir /root bash /bin/bash -c "\ls -lh /home/jd/docker-extra-bashrc" \
         && docker exec -it --user root --workdir /root bash /bin/bash -c "chown jd:jd /home/jd/docker-extra-bashrc" \
+        && docker exec -it --user root --workdir /root bash /bin/bash -c "chmod 644 /home/jd/docker-extra-bashrc" \
         && docker exec -it --user root --workdir /root bash /bin/bash -c "\ls -lh /home/jd/docker-extra-bashrc" \
         && docker exec -it --user jd --workdir /home/jd bash /bin/bash -c "cp ~/.bashrc ~/.bashrc.bck" \
-        && docker exec -it --user jd --workdir /home/jd bash /bin/bash -c "cat ~/docker-extra-bashrc >> ~/.bashrc" \
+        && docker exec -it --user jd --workdir /home/jd bash /bin/bash -c "echo >> ~/.bashrc" \
+        && docker exec -it --user jd --workdir /home/jd bash /bin/bash -c "echo '. ~/docker-extra-bashrc' >> ~/.bashrc" \
         && docker exec -it --user jd --workdir /home/jd bash /bin/bash -c "date" \
         && docker exec -it --user jd --workdir /home/jd bash /bin/bash -i -c "la .") \
             && docker stop bash
